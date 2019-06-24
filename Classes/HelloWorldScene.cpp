@@ -116,14 +116,43 @@ bool HelloWorld::init()
 //        this->addChild(sprite, 0);
 //    }
 	//テクスチャ名を指定して、スプライトを作成
-	Sprite * sprite = Sprite::create("pacman.png");
+	sprite = Sprite::create("araiguma.png");
 	this->addChild(sprite);
+	sprite->setScale(1.0f);
 
-   return true;
+	/*Sprite*sprite2 = Sprite::create("pacman.png");
+	this->addChild(sprite);
+	sprite->setScale(1.0f);*/
+
+
 
 	
+	//画像の基準点（アンカーポイント）を設定
+	sprite->setAnchorPoint(Vec2(0.0f, 1.0f));
+	//回転も基準点を中心に回転するようになる
+	//sprite->setRotation(90.0f);
+	
+	//                       R   G  B
+	//sprite->setColor(Color3B(255, 0, 0));
+	//sprite->setColor(Color3B(0, 0, 255));
 
+	//左右反転
+	//sprite->setFlippedX(true);
 
+	//切り取り
+	//sprite->setTextureRect(0, 0, 100, 100);
+
+	sprite->setPosition(Vec2(visibleSize.width /2.0f, visibleSize.height/2.0f)); 
+	//sprite2->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
+
+	//updateが呼び出されるようにする
+	this->scheduleUpdate();
+	//青
+	blue = 1;
+	//不透明度
+	opacity = 0;
+
+   return true;
 }
 
 
@@ -138,5 +167,30 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
 
+
+}
+
+void HelloWorld::update(float delta)
+{
+	//1
+	//rot += 1.0f;
+	//sprite->setRotation(rot);
+
+	//2
+	/*blue += 255.0f/180.0f;
+	if (blue > 255)
+	{
+		blue = 255;
+	}
+	sprite->setColor(Color3B(255.0f - blue, 0, blue));*/
+
+	//3
+	/*opacity += 1.0f;
+	if (opacity > 255.0f)
+	{
+		opacity = 255.0f;
+	}
+	sprite2->setOpacity(opacity);
+	sprite->setOpacity(255.0f - opacity);*/
 
 }
