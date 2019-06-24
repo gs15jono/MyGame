@@ -124,7 +124,8 @@ bool HelloWorld::init()
 	this->addChild(sprite2);
 	sprite->setScale(1.0f);*/
 
-	//MoveTo*action1 = MoveTo::create(1.0f, Vec2(200, 100));
+	MoveBy*action1 = MoveBy::create(3.0f, Vec2(400, 200));
+    sprite->runAction(action1);
 	
 
 	///ScaleTo*action1 = ScaleTo::create(2.0f, 2.0f);
@@ -137,11 +138,19 @@ bool HelloWorld::init()
 	conf.endPosition = Vec2(1200, 360);
 	BezierTo*action1 = BezierTo::create(2.0f, conf);*/
 	
-	sprite->setOpacity(0);
+	//フェード
+	//FadeIn*action1 = FadeIn::create(1.0f);
+	//点滅
+	//Blink*action1 = Blink::create(5.0f, 50);
 
-	FadeIn*action1 = FadeIn::create(1.0f);
+	//歪み
+	//SkewTo*action1 = SkewTo::create(1.0f, 5.0f, 6.0f);
+
+	//回転
+	//RotateTo*action1 = RotateTo::create(5.0f,90.0f);
+
+	//EaseSineInOut*action2 = EaseSineInOut::create(action1);
 		
-    sprite->runAction(action1);
 	
 	//画像の基準点（アンカーポイント）を設定
 	sprite->setAnchorPoint(Vec2(1.0f, 1.0f));
