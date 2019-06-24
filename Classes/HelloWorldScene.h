@@ -38,12 +38,7 @@ public:
 	//スプライト
 	cocos2d::Sprite* sprite;
     cocos2d::Sprite* sprite2;
-	int cc = 0;
-	float rot = 0;
-	float opacity;
 
-	//青
-	float blue;
 
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);

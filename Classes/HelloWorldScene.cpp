@@ -118,17 +118,33 @@ bool HelloWorld::init()
 	//テクスチャ名を指定して、スプライトを作成
 	sprite = Sprite::create("araiguma.png");
 	this->addChild(sprite);
-	sprite->setScale(1.0f);
-
+	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	sprite->setScale(0.2f);
 	/*Sprite*sprite2 = Sprite::create("pacman.png");
-	this->addChild(sprite);
+	this->addChild(sprite2);
 	sprite->setScale(1.0f);*/
 
+	//MoveTo*action1 = MoveTo::create(1.0f, Vec2(200, 100));
+	
 
+	///ScaleTo*action1 = ScaleTo::create(2.0f, 2.0f);
+	//JumpTo*action1 = JumpTo::create(1.0f, Vec2(200, 100), 500.0f, 2);
 
+	//ベジェ曲線
+	/*ccBezierConfig conf;
+	conf.controlPoint_1 = Vec2(800, 700);
+	conf.controlPoint_2 = Vec2(600, 700);
+	conf.endPosition = Vec2(1200, 360);
+	BezierTo*action1 = BezierTo::create(2.0f, conf);*/
+	
+	sprite->setOpacity(0);
+
+	FadeIn*action1 = FadeIn::create(1.0f);
+		
+    sprite->runAction(action1);
 	
 	//画像の基準点（アンカーポイント）を設定
-	sprite->setAnchorPoint(Vec2(0.0f, 1.0f));
+	sprite->setAnchorPoint(Vec2(1.0f, 1.0f));
 	//回転も基準点を中心に回転するようになる
 	//sprite->setRotation(90.0f);
 	
@@ -141,16 +157,10 @@ bool HelloWorld::init()
 
 	//切り取り
 	//sprite->setTextureRect(0, 0, 100, 100);
-
-	sprite->setPosition(Vec2(visibleSize.width /2.0f, visibleSize.height/2.0f)); 
 	//sprite2->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
-	//青
-	blue = 1;
-	//不透明度
-	opacity = 0;
 
    return true;
 }
@@ -172,25 +182,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
-	//1
-	//rot += 1.0f;
-	//sprite->setRotation(rot);
 
-	//2
-	/*blue += 255.0f/180.0f;
-	if (blue > 255)
-	{
-		blue = 255;
-	}
-	sprite->setColor(Color3B(255.0f - blue, 0, blue));*/
 
-	//3
-	/*opacity += 1.0f;
-	if (opacity > 255.0f)
-	{
-		opacity = 255.0f;
-	}
-	sprite2->setOpacity(opacity);
-	sprite->setOpacity(255.0f - opacity);*/
 
 }
