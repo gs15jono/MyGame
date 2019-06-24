@@ -115,25 +115,36 @@ bool HelloWorld::init()
 //        // add the sprite as a child to this layer
 //        this->addChild(sprite, 0);
 //    }
+
+	for(int i=0;i< 5;i++)
+	{
+		sprite[i] = Sprite::create("araiguma.png");
+		this->addChild(sprite[i]);
+		sprite[i]->setPosition(Vec2(200*i, visibleSize.height / 2));
+		sprite[i]->setScale(0.2f);
+
+		MoveBy*action1 = MoveBy::create(1.0f, Vec2(400, 200));
+		sprite[i]->runAction(action1);
+	}
 	//テクスチャ名を指定して、スプライトを作成
 	//spriteの生成
-	sprite = Sprite::create("araiguma.png");
-	this->addChild(sprite);
-	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	sprite->setScale(0.2f);
+	//sprite = Sprite::create("araiguma.png");
+	//this->addChild(sprite);
+	//sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	//sprite->setScale(0.2f);
 
-	//sprite2の生成
-	sprite2 = Sprite::create("lesserpanda.png");
-	this->addChild(sprite2);
-	sprite2->setPosition(Vec2(300, visibleSize.height / 2));
-	sprite2->setScale(0.2f);
-	
-	//action1の生成
-	MoveBy*action1 = MoveBy::create(3.0f, Vec2(400, 200));
-    sprite->runAction(action1);
-	//action2の生成
-	//MoveBy*action2 = MoveBy::create(3.0f, Vec2(400, 200));
-	sprite2->runAction(action1->clone());
+	////sprite2の生成
+	//sprite2 = Sprite::create("lesserpanda.png");
+	//this->addChild(sprite2);
+	//sprite2->setPosition(Vec2(300, visibleSize.height / 2));
+	//sprite2->setScale(0.2f);
+	//
+	////action1の生成
+	//MoveBy*action1 = MoveBy::create(3.0f, Vec2(400, 200));
+ //   sprite->runAction(action1);
+	////action2の生成
+	////MoveBy*action2 = MoveBy::create(3.0f, Vec2(400, 200));
+	//sprite2->runAction(action1->clone());
 	
 
 
@@ -162,7 +173,7 @@ bool HelloWorld::init()
 		
 	
 	//画像の基準点（アンカーポイント）を設定
-	sprite->setAnchorPoint(Vec2(1.0f, 1.0f));
+	//sprite->setAnchorPoint(Vec2(1.0f, 1.0f));
 	//回転も基準点を中心に回転するようになる
 	//sprite->setRotation(90.0f);
 	
