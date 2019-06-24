@@ -119,18 +119,20 @@ bool HelloWorld::init()
 	//—”‚Ì‰Šú‰»
 	srand(time(nullptr));
 
-	for(int i=0;i< 5;i++)
+	for(int i=0;i< 10;i++)
 	{
-		sprite[i] = Sprite::create("araiguma.png");
-		this->addChild(sprite[i]);
-		sprite[i]->setPosition(Vec2(200*i, visibleSize.height / 2));
-		sprite[i]->setScale(0.2f);
-
 		float mx, my;
 		mx = (float)rand() / RAND_MAX * 500;
 		my = (float)rand() / RAND_MAX * 500;
 
-		JumpBy*action1 = JumpBy::create(1.0f, Vec2(0, 0),200.0f,1);
+		sprite[i] = Sprite::create("araiguma.png");
+		this->addChild(sprite[i]);
+		sprite[i]->setPosition(Vec2(mx,my));
+		sprite[i]->setScale(0.2f);
+
+		mx = (float)rand() / RAND_MAX * 500;
+		my = (float)rand() / RAND_MAX * 500;
+		MoveTo*action1 = MoveTo::create(1.0f, Vec2(mx, my));
 		sprite[i]->runAction(action1);
 	}
 
