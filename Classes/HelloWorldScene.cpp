@@ -117,41 +117,42 @@ bool HelloWorld::init()
 //    }
 
 	//乱数の初期化
-	srand(time(nullptr));
+	//srand(time(nullptr));
 
-	for(int i=0;i< 5;i++)
-	{
-		sprite[i] = Sprite::create("araiguma.png");
-		this->addChild(sprite[i]);
-		sprite[i]->setPosition(Vec2(200*i, visibleSize.height / 2));
-		sprite[i]->setScale(0.2f);
+	//for(int i=0;i< 5;i++)
+	//{
+	//	sprite[i] = Sprite::create("araiguma.png");
+	//	this->addChild(sprite[i]);
+	//	sprite[i]->setPosition(Vec2(200*i, visibleSize.height / 2));
+	//	sprite[i]->setScale(0.2f);
 
-		float mx, my;
-		mx = (float)rand() / RAND_MAX * 500;
-		my = (float)rand() / RAND_MAX * 500;
+	//	float mx, my;
+	//	mx = (float)rand() / RAND_MAX * 500;
+	//	my = (float)rand() / RAND_MAX * 500;
 
-		MoveBy*action1 = MoveBy::create(1.0f, Vec2(mx, my));
-		sprite[i]->runAction(action1);
-	}
+	//	MoveBy*action1 = MoveBy::create(1.0f, Vec2(mx, my));
+	//	sprite[i]->runAction(action1);
+	//}
+
 	//テクスチャ名を指定して、スプライトを作成
 	//spriteの生成
-	//sprite = Sprite::create("araiguma.png");
-	//this->addChild(sprite);
-	//sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	//sprite->setScale(0.2f);
+	sprite = Sprite::create("araiguma.png");
+	this->addChild(sprite);
+	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	sprite->setScale(0.2f);
 
-	////sprite2の生成
-	//sprite2 = Sprite::create("lesserpanda.png");
-	//this->addChild(sprite2);
-	//sprite2->setPosition(Vec2(300, visibleSize.height / 2));
-	//sprite2->setScale(0.2f);
-	//
-	////action1の生成
-	//MoveBy*action1 = MoveBy::create(3.0f, Vec2(400, 200));
- //   sprite->runAction(action1);
-	////action2の生成
-	////MoveBy*action2 = MoveBy::create(3.0f, Vec2(400, 200));
-	//sprite2->runAction(action1->clone());
+	//sprite2の生成
+	sprite2 = Sprite::create("lesserpanda.png");
+	this->addChild(sprite2);
+	sprite2->setPosition(Vec2(300, visibleSize.height / 2));
+	sprite2->setScale(0.2f);
+	
+	//action1の生成
+	JumpBy*action1 = JumpBy::create(3.0f, Vec2(100, 100),100.0f,1);
+    sprite->runAction(action1);
+	//action2の生成
+	//MoveBy*action2 = MoveBy::create(3.0f, Vec2(400, 200));
+	sprite2->runAction(action1->clone());
 	
 
 
