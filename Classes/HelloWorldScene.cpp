@@ -116,6 +116,9 @@ bool HelloWorld::init()
 //        this->addChild(sprite, 0);
 //    }
 
+	//乱数の初期化
+	srand(time(nullptr));
+
 	for(int i=0;i< 5;i++)
 	{
 		sprite[i] = Sprite::create("araiguma.png");
@@ -123,7 +126,11 @@ bool HelloWorld::init()
 		sprite[i]->setPosition(Vec2(200*i, visibleSize.height / 2));
 		sprite[i]->setScale(0.2f);
 
-		MoveBy*action1 = MoveBy::create(1.0f, Vec2(400, 200));
+		float mx, my;
+		mx = (float)rand() / RAND_MAX * 500;
+		my = (float)rand() / RAND_MAX * 500;
+
+		MoveBy*action1 = MoveBy::create(1.0f, Vec2(mx, my));
 		sprite[i]->runAction(action1);
 	}
 	//テクスチャ名を指定して、スプライトを作成
