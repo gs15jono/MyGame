@@ -107,35 +107,6 @@ bool HelloWorld::init()
 	spr->setPosition(Vec2(1150,600));
 	spr->setScale(0.5f);
 
-	//左移動
-	MoveBy*movebyL = MoveBy::create(5.0f, Vec2(-1050.0f, 0.0f));
-	//右移動
-	MoveBy*movebyR = MoveBy::create(5.0f, Vec2(1050.0f, 0.0f));
-	//下移動
-	MoveBy*movebyD = MoveBy::create(2.5f, Vec2(0.0f, -500));
-	//上移動
-	MoveBy*movebyU = MoveBy::create(2.5f, Vec2(0.0f, 500));
-	
-	//5sフェードイン
-	FadeIn*fadein = FadeIn::create(5.0f);
-	//5sフェードアウト
-	FadeOut*fadeout = FadeOut::create(5.0f);
-
-	//左移動+フェードアウト
-	Spawn*spawn1 = Spawn::create(movebyL, fadeout,nullptr);
-	//右移動+フェードイン
-	Spawn*spawn2 = Spawn::create(movebyR, fadein,nullptr);
-
-
-	//シークエンス
-	Sequence*seq = Sequence::create(movebyL,movebyD,movebyR,movebyU,nullptr);
-	//リピート
-	Repeat*rep = Repeat::create(seq, 5);
-	//無限利リピート
-	RepeatForever*repF = RepeatForever::create(seq);
-	//実行
-	spr->runAction(repF);
-
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
 
