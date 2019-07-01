@@ -105,6 +105,7 @@ bool HelloWorld::init()
 	Sprite*spr = Sprite::create("HelloWorld.png");
 	this->addChild(spr);
 
+
 	//アクション1
 	MoveTo*moveTo = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
 	//アクション２
@@ -116,8 +117,10 @@ bool HelloWorld::init()
 	//連続アクションの作成
 	Sequence * seq = Sequence::create(moveTo, spawn,nullptr);
 
+	JumpBy*jumpBy = JumpBy::create(0.5f, Vec2(100.0f, 100.0f),100.0f,1);
+	RepeatForever* repeatF = RepeatForever::create(seq);
 	//実行
-	spr->runAction(seq);
+	spr->runAction(repeatF);
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
