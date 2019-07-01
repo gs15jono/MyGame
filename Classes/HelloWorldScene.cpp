@@ -124,8 +124,10 @@ bool HelloWorld::init()
 
 	//シークエンス
 	Sequence*seq = Sequence::create(spawn1,spawn2, nullptr);
+	//リピート
+	Repeat*rep = Repeat::create(seq, 5);
 	//実行
-	spr->runAction(seq);
+	spr->runAction(rep);
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
