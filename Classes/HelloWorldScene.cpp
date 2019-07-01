@@ -111,10 +111,19 @@ bool HelloWorld::init()
 	MoveBy*movebyL = MoveBy::create(5.0f, Vec2(-1050.0f, 0.0f));
 	//右移動
 	MoveBy*movebyR = MoveBy::create(5.0f, Vec2(1050.0f, 0.0f));
+	//5sフェードイン
+	FadeIn*fadein = FadeIn::create(5.0f);
+	//5sフェードアウト
+	FadeOut*fadeout = FadeOut::create(5.0f);
+
+	//左移動+フェードアウト
+	Spawn*spawn1 = Spawn::create(movebyL, fadeout,nullptr);
+	//右移動+フェードイン
+	Spawn*spawn2 = Spawn::create(movebyR, fadein,nullptr);
 
 
 	//シークエンス
-	Sequence*seq = Sequence::create(movebyL, movebyR, nullptr);
+	Sequence*seq = Sequence::create(spawn1,spawn2, nullptr);
 	//実行
 	spr->runAction(seq);
 
