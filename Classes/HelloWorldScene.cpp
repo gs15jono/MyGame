@@ -101,20 +101,23 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
-    // add "HelloWorld" splash screen"
-//    auto sprite = Sprite::create("HelloWorld.png");
-//    if (sprite == nullptr)
-//    {
-//        problemLoading("'HelloWorld.png'");
-//    }
-//    else
-//    {
-//        // position the sprite on the center of the screen
-//        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-//
-//        // add the sprite as a child to this layer
-//        this->addChild(sprite, 0);
-//    }
+ 
+	Sprite*spr = Sprite::create("HelloWorld.png");
+	this->addChild(spr);
+
+	//アクション1
+	MoveTo*moveTo = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
+	//アクション２
+	JumpTo*jumpTo = JumpTo::create(1.0f, Vec2(200.0f, 200.0f), 300.0f, 2);
+	//色変更
+	TintTo * tintTo = TintTo::create(1.0f, Color3B(255, 255, 0));
+	//同時アクション
+	Spawn * spawn = Spawn::create(jumpTo,tintTo,nullptr);
+	//連続アクションの作成
+	Sequence * seq = Sequence::create(moveTo, spawn,nullptr);
+
+	//実行
+	spr->runAction(seq);
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
