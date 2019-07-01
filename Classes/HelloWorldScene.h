@@ -33,14 +33,6 @@ public:
     static cocos2d::Scene* createScene();
 
     virtual bool init();
-    
-
-	//スプライト
-	cocos2d::Sprite* sprite;
-	cocos2d::Sprite* sprite2;
-
-	//cocos2d::Sprite*sprite[100];
-
 
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
