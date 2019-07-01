@@ -104,34 +104,19 @@ bool HelloWorld::init()
  
 	Sprite*spr = Sprite::create("HelloWorld.png");
 	this->addChild(spr);
+	spr->setPosition(Vec2(1150,600));
+	spr->setScale(0.5f);
+
+	//左移動
+	MoveBy*movebyL = MoveBy::create(5.0f, Vec2(-1050.0f, 0.0f));
+	//右移動
+	MoveBy*movebyR = MoveBy::create(5.0f, Vec2(1050.0f, 0.0f));
 
 
-	//アクション1
-	MoveTo*moveTo = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
-	//アクション２
-	JumpTo*jumpTo = JumpTo::create(1.0f, Vec2(200.0f, 200.0f), 300.0f, 2);
-	//色変更
-	TintTo * tintTo = TintTo::create(1.0f, Color3B(255, 255, 0));
-	//待機
-	DelayTime*delay = DelayTime::create(1.0f);
-	//消える
-	Hide*hide = Hide::create();
-	//表示非表示
-	ToggleVisibility * toggle = ToggleVisibility::create();
-	//ノード開放
-	RemoveSelf * remove = RemoveSelf::create();
-	
-	
-	//同時アクション
-	Spawn * spawn = Spawn::create(jumpTo,tintTo,nullptr);
-	//連続アクションの作成
-	Sequence * seq = Sequence::create(moveTo,delay,remove,nullptr);
-	//リピート(回数）
-	Repeat*rep = Repeat::create(seq,6);
-	//リピート（無限）
-	RepeatForever* repeatF = RepeatForever::create(seq);
+	//シークエンス
+	Sequence*seq = Sequence::create(movebyL, movebyR, nullptr);
 	//実行
-	spr->runAction(rep);
+	spr->runAction(seq);
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
