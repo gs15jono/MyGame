@@ -112,15 +112,26 @@ bool HelloWorld::init()
 	JumpTo*jumpTo = JumpTo::create(1.0f, Vec2(200.0f, 200.0f), 300.0f, 2);
 	//色変更
 	TintTo * tintTo = TintTo::create(1.0f, Color3B(255, 255, 0));
+	//待機
+	DelayTime*delay = DelayTime::create(1.0f);
+	//消える
+	Hide*hide = Hide::create();
+	//表示非表示
+	ToggleVisibility * toggle = ToggleVisibility::create();
+	//ノード開放
+	RemoveSelf * remove = RemoveSelf::create();
+	
+	
 	//同時アクション
 	Spawn * spawn = Spawn::create(jumpTo,tintTo,nullptr);
 	//連続アクションの作成
-	Sequence * seq = Sequence::create(moveTo, spawn,nullptr);
-
-	JumpBy*jumpBy = JumpBy::create(0.5f, Vec2(100.0f, 100.0f),100.0f,1);
+	Sequence * seq = Sequence::create(moveTo,delay,remove,nullptr);
+	//リピート(回数）
+	Repeat*rep = Repeat::create(seq,6);
+	//リピート（無限）
 	RepeatForever* repeatF = RepeatForever::create(seq);
 	//実行
-	spr->runAction(repeatF);
+	spr->runAction(rep);
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
