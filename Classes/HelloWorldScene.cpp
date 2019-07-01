@@ -144,17 +144,18 @@ bool HelloWorld::init()
 	sprite->setScale(0.2f);
 
 	////sprite2‚Ì¶¬
-	//sprite2 = Sprite::create("lesserpanda.png");
-	//this->addChild(sprite2);
-	//sprite2->setPosition(Vec2(300, visibleSize.height / 2));
-	//sprite2->setScale(0.2f);
+	sprite2 = Sprite::create("lesserpanda.png");
+	this->addChild(sprite2);
+	sprite2->setPosition(Vec2(visibleSize.width/2, visibleSize.height / 2));
+	sprite2->setScale(0.2f);
+	sprite2->setOpacity(0);
 	//
 	//action1‚Ì¶¬
 	FadeOut*action1 = FadeOut::create(5.0f);
     sprite->runAction(action1);
 	////action2‚Ì¶¬
-	////MoveBy*action2 = MoveBy::create(3.0f, Vec2(400, 200));
-	//sprite2->runAction(action1->clone());
+	FadeIn*action2 = FadeIn::create(5.0f);
+	sprite2->runAction(action2);
 	
 
 
