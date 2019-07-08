@@ -101,11 +101,31 @@ bool HelloWorld::init()
     //    this->addChild(label, 1);
     //}
 
- 
-	Sprite*spr = Sprite::create("HelloWorld.png");
+	//リソース読み込み
+	//背景
+	Sprite*backG = Sprite::create("backG.png");
+	this->addChild(backG);
+	backG->setPosition(Vec2(visibleSize.width/2,visibleSize.height/2 ));
+    backG->setScale(2.3f);
+
+	//キノコ
+	Sprite*spr = Sprite::create("mushroom.png");
 	this->addChild(spr);
-	spr->setPosition(Vec2(1150,600));
-	spr->setScale(0.5f);
+	spr->setPosition(Vec2(800,150));
+	spr->setScale(0.4f);
+
+	//アクション生成
+	TintTo*tintTo1 = TintTo::create(3.0f, Color3B(100, 250, 100));
+	TintTo*tintTo2 = TintTo::create(3.0f, Color3B(255, 100, 100));
+	TintTo*tintTo3 = TintTo::create(3.0f, Color3B(100, 100, 250));
+
+
+	Sequence*seq1 = Sequence::create(tintTo1, tintTo2, tintTo3,nullptr);
+	RepeatForever*kinoko = RepeatForever::create(seq1);
+
+	//アクション実行
+	spr->runAction(kinoko);
+
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
