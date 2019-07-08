@@ -98,12 +98,16 @@ bool HelloWorld::init()
         label->setPosition(Vec2(origin.x + visibleSize.width/2,
                                 origin.y + visibleSize.height - label->getContentSize().height));
 		
-		
-
         // add the label as a child to this layer
         this->addChild(label, 1);
     }
-	
+
+	DelayTime * delay = DelayTime::create(1.0f);
+	CallFunc*callFunc = CallFunc::create(CC_CALLBACK_0(HelloWorld::myFunction, this));
+	CallFunc* callFunc2 = CallFunc::create(CC_CALLBACK_0(HelloWorld::myFunction2, this,"araiguma.png"));
+
+	Sequence * seq = Sequence::create(delay, callFunc, delay, callFunc2, nullptr);
+	this->runAction(seq);
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
@@ -135,13 +139,31 @@ void HelloWorld::update(float delta)
 		//サウンド終了
 		//experimental::AudioEngine::stop(audiID);
 		//experimental::AudioEngine::stopAll();
-		experimental::AudioEngine::pause(audiID);
+		//experimental::AudioEngine::pause(audiID);
 	}
 
 	if (total == 120)
 	{
-		experimental::AudioEngine::resume(audiID);
+		//experimental::AudioEngine::resume(audiID);
 	}
 
+
+}
+
+void HelloWorld::myFunction()
+{
+	//任意の処理
+	Sprite*spr = Sprite::create("HelloWorld.png");
+	this->addChild(spr);
+	spr->setPosition(Vec2(500, 500));
+
+}
+
+void HelloWorld::myFunction2(std::string filename)
+{
+	//任意の処理
+	Sprite*spr = Sprite::create(filename);
+	this->addChild(spr);
+	spr->setPosition(Vec2(500, 500));
 
 }

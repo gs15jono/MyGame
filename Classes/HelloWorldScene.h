@@ -26,6 +26,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "AudioEngine.h"
 
 class HelloWorld : public cocos2d::Scene
 {
@@ -41,7 +42,10 @@ public:
 
 	//int audiID;
 
-	int audiID = experimental::AudioEngine::play2d("dash.mp3", true);
+	//int audiID = experimental::AudioEngine::play2d("dash.mp3", true);
+
+	void myFunction();
+	void myFunction2(std::string filename);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
