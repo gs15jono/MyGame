@@ -101,7 +101,6 @@ bool HelloWorld::init()
         // add the label as a child to this layer
         this->addChild(label, 1);
     }
-	audiID = experimental::AudioEngine::play2d("dash.mp3", true);
 
 	DelayTime * delay = DelayTime::create(1.0f);
 	CallFunc*callFunc = CallFunc::create(CC_CALLBACK_0(HelloWorld::myFunction, this));
@@ -109,6 +108,9 @@ bool HelloWorld::init()
 
 	Sequence * seq = Sequence::create(delay, callFunc, delay, callFunc2, nullptr);
 	this->runAction(seq);
+
+	audiID = experimental::AudioEngine::play2d("dash.mp3", true);
+
 
 	//update‚ªŒÄ‚Ño‚³‚ê‚é‚æ‚¤‚É‚·‚é
 	this->scheduleUpdate();
@@ -134,6 +136,8 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 void HelloWorld::update(float delta)
 {
 	unsigned int total = Director::getInstance()->getTotalFrames();
+	
+
 
 	if (total == 60)
 	{

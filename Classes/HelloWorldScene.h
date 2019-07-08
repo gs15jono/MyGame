@@ -42,11 +42,11 @@ public:
 
 	int audiID;
 
-	
-
 	void myFunction();
 	void myFunction2(std::string filename);
 
+
+	
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 };
