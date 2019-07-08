@@ -39,6 +39,10 @@ public:
     
 	void update(float delta) override;
 
+	//int audiID;
+
+	int audiID = experimental::AudioEngine::play2d("dash.mp3", true);
+
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 };

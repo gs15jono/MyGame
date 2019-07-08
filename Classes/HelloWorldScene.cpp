@@ -24,6 +24,7 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "AudioEngine.h"
 
 USING_NS_CC;
 
@@ -96,12 +97,13 @@ bool HelloWorld::init()
         // position the label on the center of the screen
         label->setPosition(Vec2(origin.x + visibleSize.width/2,
                                 origin.y + visibleSize.height - label->getContentSize().height));
+		
+		
 
         // add the label as a child to this layer
         this->addChild(label, 1);
     }
-
-
+	
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
@@ -126,7 +128,20 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
+	unsigned int total = Director::getInstance()->getTotalFrames();
 
+	if (total == 60)
+	{
+		//サウンド終了
+		//experimental::AudioEngine::stop(audiID);
+		//experimental::AudioEngine::stopAll();
+		experimental::AudioEngine::pause(audiID);
+	}
+
+	if (total == 120)
+	{
+		experimental::AudioEngine::resume(audiID);
+	}
 
 
 }
