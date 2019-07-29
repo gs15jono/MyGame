@@ -24,6 +24,7 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "AudioEngine.h"
 
 USING_NS_CC;
 
@@ -102,33 +103,71 @@ bool HelloWorld::init()
     //}
 
 	//リソース読み込み
-	//背景
-	Sprite*backG = Sprite::create("backG.png");
+	//背景1
+	backG = Sprite::create("backG.png");
 	this->addChild(backG);
 	backG->setPosition(Vec2(visibleSize.width/2,visibleSize.height/2 ));
     backG->setScale(2.3f);
 
 	//キノコ
-	Sprite*spr = Sprite::create("mushroom.png");
-	this->addChild(spr);
-	spr->setPosition(Vec2(800,150));
-	spr->setScale(0.4f);
+	mush = Sprite::create("mushroom.png");
+	this->addChild(mush);
+	mush->setPosition(Vec2(1200,150));
+	mush->setScale(0.4f);
+
+	//走るマリオ
+	marioRun = Sprite::create("mario-run.png");
+	this->addChild(marioRun);
+	marioRun->setPosition(Vec2(100, 220));
+	marioRun->setScale(0.6f);
+
+	//背景2
+	backS = Sprite::create("backS.png");
+	this->addChild(backS);
+	backS->setPosition(600, 400);
+	backS->setScale(2.3f);
+	backS->setOpacity(0);
+	//正面マリオ
+	marioF = Sprite::create("mario-front.png");
+	this->addChild(marioF);
+	marioF->setPosition(700, 100);
+	marioF->setOpacity(0);
+
+	//BGM1
+	id =experimental::AudioEngine::play2d("3684.mp3",true);
 
 	//アクション生成
 	TintTo*tintTo1 = TintTo::create(3.0f, Color3B(100, 250, 100));
 	TintTo*tintTo2 = TintTo::create(3.0f, Color3B(255, 100, 100));
 	TintTo*tintTo3 = TintTo::create(3.0f, Color3B(100, 100, 250));
 
+	MoveBy*moveMario = MoveBy::create(5.0f, Vec2(700, 0));
+	MoveTo*moveMushu = MoveTo::create(5.0f, Vec2(800, 150));
+	Blink*marioBlink = Blink::create(1.0f, 4);
+	ScaleBy*marioRunScale = ScaleBy::create(1.0f,5.0f);
+	RotateBy*mariorunRote = RotateBy::create(1.0f, 360);
+	//一括フェード
+	CallFunc*fade = CallFunc::create(CC_CALLBACK_0(HelloWorld::spritsfade, this));
+	//後半画像セット
+	CallFunc*change = CallFunc::create(CC_CALLBACK_0(HelloWorld::spritsChange, this));
 
-	Sequence*seq1 = Sequence::create(tintTo1, tintTo2, tintTo3,nullptr);
-	RepeatForever*kinoko = RepeatForever::create(seq1);
+	//キノコアクション
+	Sequence*mushtint = Sequence::create(tintTo1, tintTo2, tintTo3,nullptr);
+	RepeatForever*kinoko = RepeatForever::create(mushtint);
+	Spawn*mushAct = Spawn::create(mushtint, moveMushu,nullptr);
+
+	//走るマリオアクション
+	Spawn*murioRunSpw = Spawn::create(marioRunScale, mariorunRote, nullptr);
+	Sequence*marioRunseq = Sequence::create(moveMario, marioBlink,murioRunSpw,fade,change,nullptr);
 
 	//アクション実行
-	spr->runAction(kinoko);
+	mush->runAction(mushAct);
+	marioRun->runAction(marioRunseq);
 
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
+
 
    return true;
 }
@@ -151,6 +190,132 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 void HelloWorld::update(float delta)
 {
 
+}
 
+
+//SE再生
+void HelloWorld::callSE(std::string name)
+{
+	int oudioID;
+	oudioID = experimental::AudioEngine::play2d(name);
+	
+}
+
+////フェード
+void HelloWorld::spritsfade()
+{
+	FadeOut*fade = FadeOut::create(1.0f);
+	marioRun->runAction(fade);
+	mush->runAction(fade->clone());
+	backG->runAction(fade->clone());
+
+	//for (auto child : this->getChildren())
+	//{
+	//	FadeOut*fade = FadeOut::create(1.0f);
+	//	child->runAction(fade);
+	//}
+
+	this->spritsChange();
+}
+
+//後半
+void HelloWorld::spritsChange()
+{
+	
+
+	FadeIn*fadein = FadeIn::create(1.0f);
+	DelayTime*delay = DelayTime::create(1.5f);
+	SkewTo*skew1 = SkewTo::create(1.0f, 10, 10);
+	SkewTo*skew2 = SkewTo::create(1.0f, -10, 5);
+	SkewTo*skew3 = SkewTo::create(1.0f, 0, 0);
+	SkewTo*skew4 = SkewTo::create(1.0f, 10, -5);
+	SkewTo*skew5 = SkewTo::create(1.0f, -10, -10);
+	Sequence*skew6 = Sequence::create(skew1, skew2,skew3,skew4,skew5, nullptr);
+	RepeatForever*skew = RepeatForever::create(skew6);
+
+	CallFunc*mob = CallFunc::create(CC_CALLBACK_0(HelloWorld::mobset, this));
+	CallFunc*sound = CallFunc::create(CC_CALLBACK_0(HelloWorld::soundset, this));
+
+	Sequence*seqB = Sequence::create(delay, fadein,sound,mob, nullptr);
+	Sequence*seqM = Sequence::create(delay, fadein, nullptr);
+
+	backS->runAction(seqB);
+	marioF->runAction(seqM->clone());
+	marioF->runAction(skew);
 
 }
+
+void HelloWorld::soundset()
+{
+	experimental::AudioEngine::pause(id);
+	experimental::AudioEngine::play2d("8588.mp3",true);
+}
+
+
+//モブ
+void HelloWorld::mobset()
+{
+	//ノコノコ1号
+	noco1 = Sprite::create("noco.png");
+	this->addChild(noco1);
+	noco1->setScale(0.6f);
+	noco1->setPosition(1000, 500);
+	noco1->setFlippedX(true);
+
+	//ノコノコ2号
+	noco2 = Sprite::create("noco.png");
+	this->addChild(noco2);
+	noco2->setScale(0.6f);
+	noco2->setPosition(200, 100);
+
+	//クリボー1号
+	kuri1 = Sprite::create("Goomba.png");
+	this->addChild(kuri1);
+	kuri1->setScale(0.08f);
+	kuri1->setPosition(300, 400);
+
+	//クリボー2号
+	kuri2 = Sprite::create("Goomba.png");
+	this->addChild(kuri2);
+	kuri2->setScale(0.08f);
+	kuri2->setPosition(1000, 300);
+	kuri2->setRotation(90.0f);
+
+	this->mobmove();
+
+}
+
+//モブ動作
+void HelloWorld::mobmove()
+{
+	//クリボーアクション
+	RotateBy*rotemob = RotateBy::create(0.5f, 45.0f);
+	ScaleTo*kuriScale1 = ScaleTo::create(9.0f, 0.5f);
+	ScaleTo*kuriScale2 = ScaleTo::create(1.0f, 0.08f);
+	DelayTime*delay1 = DelayTime::create(5.0f);
+	Sequence*kuriScale = Sequence::create(kuriScale1, kuriScale2,delay1,nullptr);
+
+	RepeatForever*rotekuri = RepeatForever::create(rotemob);
+	RepeatForever*kuriscaler = RepeatForever::create(kuriScale);
+
+
+	//ノコノコアクション
+	JumpBy*nocojump1 = JumpBy::create(5.0f,Vec2(100.0,0),50.0f,5);
+	JumpBy*nocojump2 = JumpBy::create(5.0f, Vec2(-100.0, 0),50.0f, 5);
+
+	Sequence*nocoseq1 = Sequence::create(nocojump1, nocojump2, nullptr);
+	Sequence*nocoseq2 = Sequence::create(nocojump2->clone(), nocojump1->clone(), nullptr);
+
+	RepeatForever*nocoF1 = RepeatForever::create(nocoseq1);
+	RepeatForever*nocoF2 = RepeatForever::create(nocoseq2);
+
+
+	kuri1->runAction(rotekuri);
+	kuri1 -> runAction(kuriscaler);
+	kuri2->runAction(rotekuri->clone());
+	kuri2 -> runAction(kuriscaler->clone());
+
+	noco1->runAction(nocoF1);
+	noco2->runAction(nocoF2);
+}
+

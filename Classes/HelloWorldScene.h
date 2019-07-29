@@ -26,6 +26,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "AudioEngine.h"
 
 class HelloWorld : public cocos2d::Scene
 {
@@ -39,8 +40,29 @@ public:
     
 	void update(float delta) override;
 
+	void callSE(std::string name);
+    void spritsfade();
+	void spritsChange();
+	void mobset();
+	void mobmove();
+	void soundset();
+
+
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+	cocos2d::Sprite*backG;
+	cocos2d::Sprite*backS;
+	cocos2d::Sprite*mush;
+	cocos2d::Sprite*marioRun;
+	cocos2d::Sprite*marioF;
+
+	cocos2d::Sprite*noco1;
+	cocos2d::Sprite*noco2;
+	cocos2d::Sprite*kuri1;
+	cocos2d::Sprite*kuri2;
+
+	int id;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
