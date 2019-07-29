@@ -45,7 +45,10 @@ public:
 	void myFunction();
 	void myFunction2(std::string filename);
 
-
+	bool onTouchBegan(cocos2d::Touch*touch, cocos2d::Event*unused_event);
+	void onTouchMoved(cocos2d::Touch*touch, cocos2d::Event*unused_event);
+	void HelloWorld::onTouchEnded(cocos2d::Touch*touch, cocos2d::Event*unused_event);
+	void HelloWorld::onTouchEnded(cocos2d::Touch*touch, cocos2d::Event*unused_event);
 	
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);

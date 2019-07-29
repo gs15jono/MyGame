@@ -118,20 +118,24 @@ void HelloWorld::update(float delta)
 
 }
 
-void HelloWorld::myFunction()
+bool HelloWorld::onTouchBegan(Touch*touch, Event*unused_event)
 {
-	//”CˆÓ‚Ìˆ—
-	Sprite*spr = Sprite::create("HelloWorld.png");
-	this->addChild(spr);
-	spr->setPosition(Vec2(500, 500));
+	//‚±‚±‚Åtrue‚ð•Ô‚·‚ÆAonTouchEnded‚Ü‚Åƒ^ƒbƒ`ˆ—‚ª‘±‚«‚Ü‚·
+	return true;
+}
+
+void HelloWorld::onTouchMoved(Touch*touch, Event*unused_event)
+{
 
 }
 
-void HelloWorld::myFunction2(std::string filename)
+void HelloWorld::onTouchEnded(Touch*touch, Event*unused_event)
 {
-	//”CˆÓ‚Ìˆ—
-	Sprite*spr = Sprite::create(filename);
-	this->addChild(spr);
-	spr->setPosition(Vec2(500, 500));
 
 }
+
+void HelloWorld::onTouchCancelled(Touch*touch, Event*unused_event)
+{
+
+}
+
