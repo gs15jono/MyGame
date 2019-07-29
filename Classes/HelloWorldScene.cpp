@@ -87,29 +87,7 @@ bool HelloWorld::init()
     // add a label shows "Hello World"
     // create and initialize a label
 
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
-		
-        // add the label as a child to this layer
-        this->addChild(label, 1);
-    }
-
-	DelayTime * delay = DelayTime::create(1.0f);
-	CallFunc*callFunc = CallFunc::create(CC_CALLBACK_0(HelloWorld::myFunction, this));
-	CallFunc* callFunc2 = CallFunc::create(CC_CALLBACK_0(HelloWorld::myFunction2, this,"araiguma.png"));
-
-	Sequence * seq = Sequence::create(delay, callFunc, delay, callFunc2, nullptr);
-	this->runAction(seq);
-
-	audiID = experimental::AudioEngine::play2d("dash.mp3", true);
+  
 
 
 	//updateが呼び出されるようにする
@@ -135,22 +113,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
-	unsigned int total = Director::getInstance()->getTotalFrames();
 	
-
-
-	if (total == 60)
-	{
-		//サウンド終了
-		//experimental::AudioEngine::stop(audiID);
-		//experimental::AudioEngine::stopAll();
-	    experimental::AudioEngine::pause(audiID);
-	}
-
-	if (total == 120)
-	{
-		experimental::AudioEngine::resume(audiID);
-	}
 
 
 }
