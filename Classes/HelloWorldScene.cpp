@@ -87,8 +87,13 @@ bool HelloWorld::init()
     // add a label shows "Hello World"
     // create and initialize a label
 
-  
-
+	EventListenerTouchOneByOne*listnener = EventListenerTouchOneByOne::create();
+	//コールバックセット
+	listnener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
+	listnener->onTouchMoved = CC_CALLBACK_2(HelloWorld::onTouchMoved, this);
+	listnener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
+	listnener->onTouchCancelled = CC_CALLBACK_2(HelloWorld::onTouchCancelled, this);
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listnener, this);
 
 	//updateが呼び出されるようにする
 	this->scheduleUpdate();
@@ -120,12 +125,19 @@ void HelloWorld::update(float delta)
 
 bool HelloWorld::onTouchBegan(Touch*touch, Event*unused_event)
 {
+	//experimental::AudioEngine::play2d("dash.mp3");
+	Vec2 touch_pos = touch->getLocation();
+	Sprite*spr = Sprite::create("CloseSelected.png");
+	this->addChild(spr);
+	spr->setPosition(touch_pos);
+
 	//ここでtrueを返すと、onTouchEndedまでタッチ処理が続きます
 	return true;
 }
 
 void HelloWorld::onTouchMoved(Touch*touch, Event*unused_event)
 {
+
 
 }
 
