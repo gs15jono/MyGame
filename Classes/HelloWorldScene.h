@@ -41,6 +41,7 @@ public:
 	void update(float delta) override;
 
 	int audiID;
+	cocos2d::Sprite*spr;
 
 	void myFunction();
 	void myFunction2(std::string filename);

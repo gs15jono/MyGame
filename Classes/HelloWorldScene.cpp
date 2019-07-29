@@ -127,7 +127,7 @@ bool HelloWorld::onTouchBegan(Touch*touch, Event*unused_event)
 {
 	//experimental::AudioEngine::play2d("dash.mp3");
 	Vec2 touch_pos = touch->getLocation();
-	Sprite*spr = Sprite::create("CloseSelected.png");
+	spr = Sprite::create("CloseSelected.png");
 	this->addChild(spr);
 	spr->setPosition(touch_pos);
 
@@ -137,8 +137,8 @@ bool HelloWorld::onTouchBegan(Touch*touch, Event*unused_event)
 
 void HelloWorld::onTouchMoved(Touch*touch, Event*unused_event)
 {
-
-
+	Vec2 touch_pos = touch->getLocation();
+	spr->setPosition(touch_pos);
 }
 
 void HelloWorld::onTouchEnded(Touch*touch, Event*unused_event)
