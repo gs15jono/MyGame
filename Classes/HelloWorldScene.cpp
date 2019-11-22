@@ -143,6 +143,7 @@ void HelloWorld::onTouchMoved(Touch*touch, Event*unused_event)
 
 void HelloWorld::onTouchEnded(Touch*touch, Event*unused_event)
 {
+
 	spr->removeFromParent();
 }
 
